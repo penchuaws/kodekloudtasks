@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-deploy
+  namespace: devops
+  labels:
+    app: nodeapp
+spec:
+  replicas: 4
+  strategy:
+   type: RollingUpdate
+   rollingUpdate:
+     maxSurge: 1
+     maxUnavailable: 2  
+  selector:
+    matchLabels:
+     app: nodeapp
+  template:
+    metadata:
+       labels:
+         app: nodeapp
+    spec:
+      containers:
+        - name: httpd
+          image: httpd:2.4.27
+          
+          ports:
+            - containerPort: 80
+           

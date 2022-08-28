@@ -1,0 +1,8 @@
+---
+- name: copy the module
+  hosts: stapp01, stapp02, stapp03
+  become: yes
+  tasks:
+    - name: copy the file
+      copy: src=/usr/src/security/index.html dest=/opt/security
+

@@ -1,0 +1,15 @@
+---
+-  name: Ansible archive Examples
+   hosts: stapp01,stapp02,stapp03
+   become: yes
+   tasks:
+    - name: Compress the file using Default format
+      archive:
+        path: /usr/src/data/
+        dest: /opt/data/news.tar.gz
+        format: gz
+        force_archive: true
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+     
+     

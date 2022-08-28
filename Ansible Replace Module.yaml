@@ -1,0 +1,23 @@
+---
+- name: Ansible Replace Module
+  hosts: stapp01, stapp02, stapp03
+  become: yes
+  tasks:
+    - name:  blog.txt Replace Module
+      replace: 
+        path: /opt/data/blog.txt
+        regexp: "xFusionCorp" 
+        replace: "Nautilus"
+      when: inventory_hostname == "stapp01"
+    - name:  story.txt Replace Module
+      replace: 
+        path: /opt/data/story.txt
+        regexp: "Nautilus" 
+        replace: "KodeKloud"
+      when: inventory_hostname == "stapp02"
+    - name:  media.txt Replace Module
+      replace: 
+        path: /opt/data/media.txt
+        regexp: "KodeKloud" 
+        replace: "xFusionCorp Industries"
+      when: inventory_hostname == "stapp03"

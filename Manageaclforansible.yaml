@@ -1,0 +1,13 @@
+---
+- name: Manageaclforansible
+  become: yes
+  hosts: stapp01  
+  tasks:
+   - name : blog.txt empty file createted
+     file:
+      path:  /opt/devops/blog.txt
+      state: touch
+   - name: granct access
+       acl:
+         path: /opt/data/ 
+

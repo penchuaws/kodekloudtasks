@@ -1,0 +1,38 @@
+--- 
+- name: ansible create users and groups
+  become: yes
+  hosts: stapp01
+  tasks:
+    - name: create admins groups
+      group:
+        name: admins
+        state: present
+    - name: create developers groups
+      group:
+        name: developers
+        state: present
+    - name: create users under developers
+      users: 
+        name: "{{item}}"
+        password: "{{'B4zNgHA7Ya' | password_hash ('sha512') }}"
+        groups: developers
+        home: "/var/www/{{ item }}"
+        state: present 
+      loop:
+       - tim
+       - ray
+       - jim
+       - mark
+    - name: create users under admins
+      users:
+        name: "{{ item}}"
+        password: "{{'TmPcZjtRQx' |password_hash ('sha512')}}"
+        groups: wheel,admins
+        state: present
+      loop:
+        - rob
+        - david
+        - joy
+      
+            
+

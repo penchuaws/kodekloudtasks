@@ -1,0 +1,13 @@
+---
+- name: unarchive the file and add under owener& group
+  hosts: stapp01, stapp02, stappo3
+  become: yes
+  become_method: sudo
+  tasks:
+     -name: unarchive file
+      unarchive:
+        src: /usr/src/devops/nautilus.zip
+        dest: /opt/devops/
+        mode: 0755
+        owner: {{ ansible_user }}
+        group: {{ ansible_user }}

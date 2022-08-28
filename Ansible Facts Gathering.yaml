@@ -1,0 +1,24 @@
+---
+- name: create blokinfile and install appache https
+  hosts: stapp01, stapp02, stapp03
+  gather_facts: true
+  become: yes
+  become_method: sudo
+  tasks:
+   - name: create black file
+     blockinfile:
+       create: yes
+       path: /root/facts.txt
+       block: |
+         Ansible managed node IP is {{ ansible_default_ipv4.address }}
+   - name: install httpd pacage
+     package:
+        name: httpd
+        state: latest
+   - name: copay facts to hmtl
+     shell: cp /root/facts.txt /var/www/html/index.html
+   - name: restart the hpptd
+     systemd:
+       name: httpd
+       state: restarted
+

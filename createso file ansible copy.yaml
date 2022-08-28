@@ -1,0 +1,30 @@
+---
+- name: create a fiels and softlinks
+  hosts: all
+  become: yes
+  tasks:
+     - name: create a file on stapp01
+       copy:
+         src: /usr/src/sysops/blog.txt
+         dest: /opt/sysops
+         owner: tony
+         group: tony
+         mode: "0777"
+       when: inventory_hostname == "stapp01"
+     - name: copy a file on stapp02
+       copy:
+         src: /usr/src/sysops/story.txt
+         dest: /opt/sysops
+         owner: steve
+         group: steve
+         mode: "0777"
+       when: inventory_hostname == "stapp02"
+     - name: copy the file on stapp03
+       copy:
+         src: /usr/src/sysops/media.txt
+         dest: /opt/sysops
+         owner: banner
+         group: banner
+         mode: "0777"
+       when: inventory_hostname == "stapp03"
+     

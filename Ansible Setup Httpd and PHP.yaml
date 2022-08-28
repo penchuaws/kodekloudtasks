@@ -1,0 +1,31 @@
+---
+- name: install the httpd and php packages
+  become: yes
+  hosts: stapp01
+  tasks:
+    - name: install http and php packes
+      package:
+        name: httpd, php
+        state: present
+    - name: change the path
+      replace:
+         path: /etc/httpd/conf/httpd.conf
+         regexp: "/var/www/html"
+         replace: "/var/www/html/myroot"
+    - name: create directory if there is no exist
+      file:
+        path: /var/www/html/myroot
+        state: directory
+        owner: apache
+        group: apache
+    - name:  Use Jinja2 template to generate phpinfo.php   
+      template:
+        src: /home/thor/playbooks/templates/phpinfo.php.j2
+        dest: /var/www/html/myroot/phpinfo.php
+        owner: apache
+        group: apache
+    - name: statrted hpptd
+      service:
+        name: httpd
+        state: started
+        enabled: yes 

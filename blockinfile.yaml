@@ -1,0 +1,39 @@
+---
+- name: install sshd and insert some text using block in file
+- hosts: stapp01, stapp02, stapp03
+- become: yes
+- tasks:
+   - name: install httpd
+     package:
+       name: httpd
+       state: present
+   - name: start service httpd, if not started
+
+     service: 
+       name: httpd
+       state: started
+
+   - name: Add content block in index.html and set permissions
+
+       blockinfile:
+
+         path: /var/www/html/index.html
+
+         create: yes
+
+         block: |
+
+           Welcome to XfusionCorp!
+
+           This is Nautilus sample file, created using Ansible!
+
+           Please do not modify this file manually!
+
+         owner: apache
+
+         group: apache
+
+         mode: "0744"     
+
+
+

@@ -1,0 +1,32 @@
+---
+- name: create a fiels and softlinks
+  hosts: stapp01, stapp02, stapp03
+  become: yes
+  tasks:
+     - name: create a file on stapp01
+       file:
+        path: /opt/devops/blog.txt
+        owner: tony
+        group: tony
+        state: touch
+       when: inventory_hostname == "stapp01"
+     - name: create a file on stapp02
+       file:
+        path: /opt/devops/story.txt
+        owner: steve
+        group: steve
+        state: touch
+       when: inventory_hostname == "stapp02"  
+     - name: create a file on stapp03
+       file:
+        path: /opt/devops/media.txt
+        owner: banner
+        group: banner
+        state: touch
+       when: inventory_hostname == "stapp03" 
+     - name: create softlink 
+       file: 
+        src: /opt/devops
+        dest: /var/www/html
+        state: link                  
+          

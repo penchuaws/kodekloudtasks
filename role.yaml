@@ -1,0 +1,24 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: development
+  name: developer-role
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: developer-rolebinding
+  namespace: development
+subjects:
+- kind: defaults
+  name: defaults
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: developer-role
+  apiGroup: ""
+
