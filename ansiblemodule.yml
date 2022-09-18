@@ -10,5 +10,7 @@
         mode: "0755"
         owner: "{{ansible_user}}"
         group: "{{ansible_user}}"
-        
+
 ansible all -a "ls -ltr /home/" -i inventory
+
+
