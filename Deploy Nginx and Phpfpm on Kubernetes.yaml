@@ -21,7 +21,7 @@ data:
     events {} 
     http {
       server {
-        listen 8098;
+        listen 8091;
         index index.html index.htm index.php;
         root  /var/www/html;
         location ~ \.php$ {
@@ -56,7 +56,7 @@ spec:
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
     - name: php-fpm-container
-      image: php:7.3-fpm
+      image: php:7.0-fpm
       volumeMounts:
         - name: shared-files
           mountPath: /var/www/html
