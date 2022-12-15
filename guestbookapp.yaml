@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -64,8 +65,8 @@ spec:
         image: gcr.io/google_samples/gb-redisslave:v3
         resources:
            requests:
-           memory: "100Mi"
-           cpu: "100m"
+            memory: "100Mi"
+            cpu: "100m"
         ports:
         - containerPort: 6379
         env:
@@ -110,8 +111,8 @@ spec:
         image: gcr.io/google-samples/gb-frontend:v4
         resources:
            requests:
-           memory: "100Mi"
-           cpu: "100m"
+             memory: "100Mi"
+             cpu: "100m"
         ports:
         - containerPort: 80
         env:
